@@ -1,10 +1,13 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS  
+from decouple import config  # <-- Import config from python-decouple
 import openai
 
 app = Flask(__name__)
+CORS(app)  
 
-# Set up your OpenAI API Key
-openai.api_key = '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'
+# Use the API Key from environment variable
+openai.api_key = config('OPENAI_API_KEY')
 
 @app.route('/')
 def index():
